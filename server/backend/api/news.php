@@ -1,6 +1,8 @@
+<?php phpinfo(); ?>
 <?php
 require_once __DIR__ . "/../config/dbconfig.php";
 require "../config/request_config.php";
+
 
 class API
 {
