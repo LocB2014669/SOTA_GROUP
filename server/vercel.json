@@ -1,0 +1,18 @@
+{
+    "functions": {
+      "api/**/*.php": {
+        "runtime": "vercel-php@0.5.2"
+      }
+    },
+    "routes": [
+      { "src": "/product",  "dest": "/backend/api/product.php" },
+      { "src": "/productById", "dest": "/backend/api/productById.php" },
+      { "src": "/banner", "dest": "/backend/api/banner.php" },
+      { "src": "/gallery", "dest": "/backend/api/gallery.php" },
+      { "src": "/news", "dest": "/backend/api/news.php" },
+      { "src": "/product_cat", "dest": "/backend/api/product_cat.php" },
+      { "src": "/product_list", "dest": "/backend/api/product_list.php" },
+      { "src": "/product_brand", "dest": "/backend/api/product_brand.php" }
+
+      ]
+  }
