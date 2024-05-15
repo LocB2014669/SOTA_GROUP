@@ -23,7 +23,7 @@ export const Header = ({ className }) => {
   };
   useEffect(() => {
     axios
-      .get("http://localhost/public_html/backend/api/product_list.php")
+      .get("https://sota-group-thto-5snt84q2t-locb2014669s-projects.vercel.app/backend/api/product_list.php")
       .then((response) => {
         setDataDrop(response.data);
       })
@@ -33,7 +33,7 @@ export const Header = ({ className }) => {
   }, []);
   useEffect(() => {
     axios
-      .get("http://localhost/public_html/backend/api/product_brand.php")
+      .get("https://sota-group-thto-5snt84q2t-locb2014669s-projects.vercel.app/backend/api/product_brand.php")
       .then((response) => {
         setDataBrand(response.data);
       })
