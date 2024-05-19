@@ -1,5 +1,5 @@
-const linkApi = "https://loc.bendeptrai.com/backend/api";
+const link = "https://loc.bendeptrai.com/backend/api";
 const apiLink = {
-  linkApi,
+  link,
 };
 export default apiLink;

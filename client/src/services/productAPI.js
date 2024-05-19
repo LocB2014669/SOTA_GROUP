@@ -1,9 +1,10 @@
 import axios from "axios";
+import apiLink from "../constants/apiLink";
 
 export const getAllProduct = async ({}) => {
   try {
     // const { data } = await axios.get(`https://loc.bendeptrai.com/backend/api/product.php`);
-    const { data } = await axios.get(`${apiLink}/product.php`);
+    const { data } = await axios.get(`${apiLink.link}/product.php`);
 
     return data;
   } catch (error) {
@@ -16,7 +17,7 @@ export const getProductById = async ({ productId }) => {
     //   `https://loc.bendeptrai.com/backend/api/productById.php?id=${productId}`
     // );
     const { data } = await axios.get(
-      `${apiLink}/productById.php?id=${productId}`
+      `${apiLink.link}/productById.php?id=${productId}`
     );
 
     return data;
@@ -29,7 +30,7 @@ export const getPhotoGallery = async ({ productId }) => {
     // const { data } = await axios.get(
     //   `https://loc.bendeptrai.com/backend/api/gallery.php?id=${productId}`
     // );
-    const { data } = await axios.get(`${apiLink}/gallery.php?id=${productId}`);
+    const { data } = await axios.get(`${apiLink.link}/gallery.php?id=${productId}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -42,7 +43,7 @@ export const getAllBrand = async ({}) => {
     // const { data } = await axios.get(
     //   `https://loc.bendeptrai.com/backend/api/product_brand.php`
     // );
-    const { data } = await axios.get(`${apiLink}/product_brand.php`);
+    const { data } = await axios.get(`${apiLink.link}/product_brand.php`);
     return data;
   } catch (error) {
     console.log(error);

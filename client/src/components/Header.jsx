@@ -35,7 +35,7 @@ export const Header = ({ className }) => {
   };
   useEffect(() => {
     axios
-      .get(`${apiLink}/product_list.php`)
+      .get(`${apiLink.link}/product_list.php`)
       .then((response) => {
         setDataDrop(response.data);
       })
@@ -45,7 +45,7 @@ export const Header = ({ className }) => {
   }, []);
   useEffect(() => {
     axios
-      .get(`${apiLink}/product_brand.php`)
+      .get(`${apiLink.link}/product_brand.php`)
       .then((response) => {
         setDataBrand(response.data);
       })

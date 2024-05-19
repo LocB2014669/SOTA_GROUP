@@ -5,7 +5,7 @@ export const addOrder = async ({ formData }) => {
   try {
     const { data } = await axios.post(
       // `https://loc.bendeptrai.com/backend/api/order.php?quanly=order`
-      `${apiLink}/order.php?quanly=order`,
+      `${apiLink.link}/order.php?quanly=order`,
       {
         userId: formData.userId,
         products: formData.products,
