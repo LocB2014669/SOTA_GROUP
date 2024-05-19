@@ -64,19 +64,24 @@ export const NewsContainer = ({ className, data, isLoading }) => {
     <section className={`${className}`}>
       <div className="w-full">
         <ViewAll subtitle={"Tin mới cập nhật"} />
-{!isLoading && (
-       <OwlCarousel
-       className="owl-theme owl_productNew"
-       loop
-       margin={15}
-       {...options}
-     >
-       {data?.map((item) => (
-         <ArticlesNews data={item} key={item.title} />
-       ))}
-     </OwlCarousel>
-)}
- 
+        {!isLoading && (
+          <OwlCarousel
+            className="owl-theme owl_productNew"
+            loop
+            margin={15}
+            {...options}
+          >
+            {data?.map((item) => (
+              <ArticlesNews
+                data={item}
+                key={item.title}
+                className={"w-full"}
+                displayContent={true}
+                check={false}
+              />
+            ))}
+          </OwlCarousel>
+        )}
       </div>
     </section>
   );

@@ -11,7 +11,7 @@ export const NavItem = ({ item }) => {
     <li className="group lg:m-0 font-semibold transition-all duration-200  w-full lg:w-auto lg:px-0 px-3 lg:my-0 my-2 text-nowrap  ">
       {item.type === "link" ? (
         <Link
-          to={`/`}
+          to={`${item.href}`}
           className={`lg:p-2 lg:h-[64px] lg:leading-[64px] hover:text-brown text-[16px]  ${
             item.check && "text-brown"
           }`}
@@ -39,7 +39,7 @@ export const NavItem = ({ item }) => {
                   <Link
                     to={subItem.href}
                     key={subItem.title}
-                    className="px-2 py-2 hover:bg-violet hover:text-black text-black lg:text-dark-soft border-b"
+                    className="px-2 py-2 hover:bg-violet hover:text-black text-black lg:text-dark-soft border-b lg:border-none md:border-none"
                   >
                     <span className="hover:text-brown text-sm font-normal lg:uppercase">
                       {subItem.title}
@@ -62,7 +62,7 @@ export const NavItem = ({ item }) => {
           <div
             className={`${
               dropDown ? "block" : "hidden"
-            } lg:left-auto left-0 lg:w-[720px] w-full z-30 absolute overflow-hidden lg:hidden md:hidden transition-all duration-500 lg:pt-4 lg:mt-0 mt-10 lg:top-[-257px] lg:right-[240px] lg:absolute md:absolute lg:transform md:transform lg:translate-y-full md:translate-y-full lg:group-hover:block md:group-hover:block`}
+            } lg:left-auto left-0 lg:w-[720px] w-full z-30 absolute overflow-hidden lg:hidden md:hidden transition-all duration-500 lg:pt-4 lg:mt-0 mt-10 lg:top-[-221px] lg:right-[240px] lg:absolute md:absolute lg:transform md:transform lg:translate-y-full md:translate-y-full lg:group-hover:block md:group-hover:block`}
           >
             <ul className=" w-full p-2 flex lg:flex-row flex-col overflow-hidden lg:shadow-xl bg-white text-start z-30 list-none justify-between text-nowrap flex-wrap">
               {item.dataDrop.map((subItem, index) => (
@@ -79,7 +79,11 @@ export const NavItem = ({ item }) => {
                   <div className="flex flex-col justify-center gap-y-1 py-2 px-2">
                     {subItem?.items?.map((el, index) => {
                       return (
-                        <a href={el?.href} className="font-normal text-sm border-b py-2" key={index}>
+                        <a
+                          href={el?.href}
+                          className="font-normal text-sm lg:border-none md:border-none border-b py-2 lg:py-1 md:py-1"
+                          key={index}
+                        >
                           {el?.title}
                         </a>
                       );

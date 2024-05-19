@@ -39,12 +39,12 @@ export const SlidePhotoProduct = ({ data, isLoading }) => {
     setTempIndex(index);
   };
 
-  const images = [
-    "https://bizweb.dktcdn.net/thumb/large/100/508/659/products/rolex-day-date-36-everose-gold-eisenkiesel-roman-diamond-dial-128235-full-1-1.webp?v=1705932091343",
-    "https://bizweb.dktcdn.net/thumb/large/100/508/659/products/2022-09-02-17-33-30-04gup-800x.webp?v=1705932091343",
-    "https://bizweb.dktcdn.net/thumb/large/100/508/659/products/rolex-day-date-36-18378-champagne-diamond-1.jpg?v=1705932091343",
-    "https://bizweb.dktcdn.net/thumb/large/100/508/659/products/used-rolex-president-128238-diamond-dial-sku159674.webp?v=1705932091343",
-  ];
+  // const images = [
+  //   "https://bizweb.dktcdn.net/thumb/large/100/508/659/products/rolex-day-date-36-everose-gold-eisenkiesel-roman-diamond-dial-128235-full-1-1.webp?v=1705932091343",
+  //   "https://bizweb.dktcdn.net/thumb/large/100/508/659/products/2022-09-02-17-33-30-04gup-800x.webp?v=1705932091343",
+  //   "https://bizweb.dktcdn.net/thumb/large/100/508/659/products/rolex-day-date-36-18378-champagne-diamond-1.jpg?v=1705932091343",
+  //   "https://bizweb.dktcdn.net/thumb/large/100/508/659/products/used-rolex-president-128238-diamond-dial-sku159674.webp?v=1705932091343",
+  // ];
 
   return (
     <section className="w-full">
@@ -61,38 +61,43 @@ export const SlidePhotoProduct = ({ data, isLoading }) => {
             swipeable={true}
             dynamicHeight={true}
           >
-            {data.map((image, index) => (
-              <div key={index} className="border">
-                <img
-                  className="object-cover"
-                  src={stable.UPLOAD_THUMBS_PRODUCT + image.photo}
-                  alt={`Image ${index}`}
-                />
-              </div>
-            ))}
+            {data
+              .filter((item) => item.val == "san-pham")
+              .map((image, index) => (
+                <div key={index} className="border">
+                  <img
+                    className="object-cover"
+                    src={stable.UPLOAD_THUMBS_PRODUCT + image.photo}
+                    alt={`Image ${index}`}
+                  />
+                </div>
+              ))}
           </Carousel>
           <OwlCarousel
             className="owl-theme p-4 owl_productNew"
             margin={15}
             {...options}
           >
-            {data.map((image, index) => (
-              <div
-                key={index}
-                className={`thumbnail border ${
-                  activeIndex === index ? "active" : ""
-                }`}
-                onClick={() => handleThumbnailClick(index)}
-              >
-                <img
-                  src={stable.UPLOAD_THUMBS_PRODUCT + image.photo}
-                  alt={`Thumbnail ${index} object-cover `}
-                  style={{
-                    border: activeIndex === index ? "2px solid black" : "none",
-                  }}
-                />
-              </div>
-            ))}
+            {data
+              .filter((item) => item.val == "san-pham")
+              .map((image, index) => (
+                <div
+                  key={index}
+                  className={`thumbnail border ${
+                    activeIndex === index ? "active" : ""
+                  }`}
+                  onClick={() => handleThumbnailClick(index)}
+                >
+                  <img
+                    src={stable.UPLOAD_THUMBS_PRODUCT + image.photo}
+                    alt={`Thumbnail ${index} object-cover `}
+                    style={{
+                      border:
+                        activeIndex === index ? "2px solid black" : "none",
+                    }}
+                  />
+                </div>
+              ))}
           </OwlCarousel>
         </div>
       )}

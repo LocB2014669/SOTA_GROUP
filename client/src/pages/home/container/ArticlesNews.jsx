@@ -1,30 +1,60 @@
 import React from "react";
 import { stable } from "../../../constants";
+import parse from "html-react-parser";
+import { Link } from "react-router-dom";
 
-export const ArticlesNews = ({ data }) => {
+export const ArticlesNews = ({ data, className, displayContent, check }) => {
   // console.log(data, "datanew");
   return (
-    <div>
-      <div>
-        <div className="w-full">
+    <div
+      className={`${className} ${
+        !displayContent ? "flex items-start gap-x-3  " : ""
+      } `}
+    >
+      <div className={``}>
+        <div className={`${!displayContent ? "w-[100px]" : "w-full"}`}>
           <img
             src={stable.UPLOAD_THUMBS_NEWS + data?.photo}
-            className="w-full"
+            className={`w-full`}
             alt=""
           />
         </div>
-        <div>
-          <span className="text-[#8C8C8C] text-[14px]">
-            {/* {data.ngaytao} */}
+      </div>
+      <div>
+        {!displayContent ? (
+          ""
+        ) : (
+          <p className="text-[#8C8C8C] text-[14px]">
             {new Date(data.ngaytao).toLocaleDateString("vi-VN", {
               weekday: "short",
               day: "numeric",
               month: "short",
               year: "numeric",
             })}
-          </span>
-          <h2 className="text-sm font-semibold">{data?.title}</h2>
-        </div>
+          </p>
+        )}
+
+        <Link
+          to={`/news/${data.id}`}
+          className={`text-sm  ${
+            !displayContent
+              ? "line-clamp-2 text-hard font-normal"
+              : "font-semibold text-black "
+          }`}
+        >
+          {data?.title}
+        </Link>
+        {displayContent && check && (
+          <p className="line-clamp-2 text-hard mt-3 text-sm">
+            {" "}
+            <div
+              className="text-justify"
+              dangerouslySetInnerHTML={{
+                __html: parse(data.noidung),
+              }}
+            />
+          </p>
+        )}
       </div>
     </div>
   );

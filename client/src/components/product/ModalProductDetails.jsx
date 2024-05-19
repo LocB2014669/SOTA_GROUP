@@ -24,7 +24,7 @@ export const ModalProductDetails = ({ productId }) => {
   };
   const { data, isLoading, isFetching } = useQuery({
     queryFn: () => getProductById({ productId }),
-    queryKey: ["productById", productId],
+    queryKey: ["productModel", productId],
     onSuccess: (data) => {},
     onError: (error) => {
       toast.error(error.message);

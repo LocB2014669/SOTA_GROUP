@@ -169,3 +169,43 @@
 .ant-slider-rail {
   margin-top: 3px !important;
 }
+/* .googlemap {
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
+  padding-bottom: 0;
+  width: 100%;
+  height: 450px;
+}
+
+.google-iframe {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+} */
+.text-justify p {
+  padding-bottom: 20px;
+}
+.flag-dropdown {
+  right: 0 !important;
+}
+.selected-flag {
+  padding: 0 0 0 15px !important;
+  width: 48px !important;
+}
+input.form-control {
+  width: 87% !important;
+  padding-left: 10px !important;
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+  border-radius: 5px 0 0px 5px !important;
+}
+input.form-control:focus {
+  border: 1px solid #66afe9 !important;
+  box-shadow: 0 0 0 1px #66afe9 !important;
+}
+.ant-select-single {
+  height: 45px !important;
+}

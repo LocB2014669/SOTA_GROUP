@@ -2,34 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
-export const BreadCrumbs = ({ dataCrumbs, className }) => {
-  const data = [
-    {
-      title: "Trang chủ",
-      href: "/home",
-    },
-    {
-      title: "Trang chủ",
-      href: "/home",
-    },
-    {
-      title: "Trang chủ",
-      href: "/home",
-    },
-  ];
+export const BreadCrumbs = ({ data, className }) => {
   return (
-    <div className={``}>
-      <ul className="flex items-center gap-x-3 z-[999] my-5">
-        {data?.map((item, index) => (
-          <div  key={index}  className="flex items-center gap-x-3">
-            <li className=" text-sm text-[#777777]">
-              <Link to={`${item.href}`} className="hover:text-brown">{item?.title}</Link>
-            </li>
-
-            <MdKeyboardDoubleArrowRight />
-          </div>
-        ))}
-      </ul>
+    <div
+      className={`w-full flex items-center py-4 overflow-x-auto font-bold whitespace-nowrap `}
+    >
+      {data.map((item, index) => (
+        <div
+          key={index}
+          className={`flex items-center text-black dark:text-white opacity-50 text-base z-10 ${className} `}
+        >
+          <Link to={item.link}>{item.name}</Link>
+          {index !== data.length - 1 && <span className="px-3"><MdKeyboardDoubleArrowRight/></span>}
+        </div>
+      ))}
     </div>
   );
 };

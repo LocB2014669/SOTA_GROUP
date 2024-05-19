@@ -14,17 +14,11 @@ import { BsSliders } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 export const ProductFilterPage = () => {
   const [checkMenuFilter, setCheckMenuFilter] = useState(false);
+  const [breadCrumbsData, setBreadCrumbsData] = useState([]);
   const handleDisplayFilters = () => {
     setCheckMenuFilter(!checkMenuFilter);
   };
-  //   console.log(checkMenuFilter, "check");
   const [checkView, setCheckView] = useState(false);
-  //   const [price, setPrice] = useState(0);
-
-  //   const handlePriceChange = (e) => {
-  //     setPrice(e.target.value);
-  //   };
-  //   console.log(checkView, "checkvew");
   const hanldeChangeView = () => {
     setCheckView(!checkView);
   };
@@ -39,6 +33,18 @@ export const ProductFilterPage = () => {
         console.log(error);
       },
     });
+  useEffect(() => {
+    setBreadCrumbsData([
+      {
+        name: "Trang Chủ",
+        link: "/",
+      },
+      {
+        name: "Sản phẩm",
+        link: "/products",
+      },
+    ]);
+  }, []);
   const dataFilter = [
     {
       title: "Thương Hiệu",
@@ -86,7 +92,7 @@ export const ProductFilterPage = () => {
   return (
     <MainLayout checkFloat={checkMenuFilter}>
       <section className="max-w-6xl mx-auto my-10">
-        <BreadCrumbs />
+        <BreadCrumbs data={breadCrumbsData} />
         <article className="w-full lg:flex md:flex lg:gap-[20px] md:gap-[20px]">
           <div
             className={`lg:w-1/4 md:w-1/4 lg:bg-transparent md:bg-transparent bg-white z-[200] lg:top-auto md:top-auto top-0  lg:static md:static fixed transition-all duration-500 ease-in-out ${

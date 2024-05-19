@@ -13,8 +13,20 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllBrand } from "../services/productAPI";
 import axios from "axios";
 import { stable } from "../constants";
+import { Link, useNavigate } from "react-router-dom";
+import { CartDropdown } from "./cart/CartDropdown";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { logout } from "../stores/actions/user";
+import apiLink from "../constants/apiLink";
 
 export const Header = ({ className }) => {
+  const userState = useSelector((state) => state.user);
+  const cartState = useSelector((state) => state.cart);
+  // const cartState = useSelector((state) => state.cart);
+  // console.log(cartState.cartInfo, "cartData");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [dataDrop, setDataDrop] = useState([]);
   const [dataBrand, setDataBrand] = useState([]);
   const [checkShowSeasrch, setCheckShowSeasrch] = useState(false);
@@ -23,7 +35,7 @@ export const Header = ({ className }) => {
   };
   useEffect(() => {
     axios
-      .get("https://sota-group-thto-5snt84q2t-locb2014669s-projects.vercel.app/backend/api/product_list.php")
+      .get(`${apiLink}/product_list.php`)
       .then((response) => {
         setDataDrop(response.data);
       })
@@ -33,7 +45,7 @@ export const Header = ({ className }) => {
   }, []);
   useEffect(() => {
     axios
-      .get("https://sota-group-thto-5snt84q2t-locb2014669s-projects.vercel.app/backend/api/product_brand.php")
+      .get(`${apiLink}/product_brand.php`)
       .then((response) => {
         setDataBrand(response.data);
       })
@@ -72,6 +84,7 @@ export const Header = ({ className }) => {
       name: "Trang Chủ",
       check: true,
       type: "link",
+      href: "/",
     },
     {
       id: "2",
@@ -86,18 +99,21 @@ export const Header = ({ className }) => {
       name: "Tin tức",
       check: false,
       type: "link",
+      href: "/news",
     },
     {
       id: "4",
       name: "Hệ thống cửa hàng",
       check: false,
       type: "link",
+      href: "/addresShop",
     },
     {
       id: "5",
       name: "Liên hệ",
       check: false,
       type: "link",
+      href: "/contacts",
     },
     {
       id: "6",
@@ -112,14 +128,23 @@ export const Header = ({ className }) => {
       name: "Chính sách bán hàng",
       check: false,
       type: "link",
+      href: "/policy",
     },
     {
       id: "8",
       name: "Hướng dẫn chọn size",
       check: false,
       type: "link",
+      href: "/supportSize",
     },
   ];
+  const handlerLogOut = () => {
+    dispatch(logout());
+    toast.success("Đăng xuất thành công");
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
+  };
 
   return (
     <section className={`border-b`}>
@@ -127,11 +152,13 @@ export const Header = ({ className }) => {
         <nav className="flex items-center justify-between w-full h-full">
           <div className="flex items-center lg:justify-normal md:justify-normal justify-between gap-x-5 h-full w-full">
             <div>
-              <img
-                className="md:w-32 lg:h-[38px]"
-                src={stable.UPLOAD_THUMBS_BANNER + stable.STABLE_LOGO}
-                alt=""
-              />
+              <Link to={"/"}>
+                <img
+                  className="md:w-32 lg:h-[38px]"
+                  src={stable.UPLOAD_THUMBS_BANNER + stable.STABLE_LOGO}
+                  alt=""
+                />
+              </Link>
             </div>
 
             <div
@@ -176,22 +203,28 @@ export const Header = ({ className }) => {
 
           <div className="flex items-center justify-between lg:gap-x-3 md:gap-x-3 gap-x-5">
             <div className="w-7 h-7 flex items-center justify-center text-white font-semibold rounded-full bg-[#2a3f50]">
-              <IoIosSearch onClick={handleShowSearch} />
+              <IoIosSearch
+                className="cursor-pointer"
+                onClick={handleShowSearch}
+              />
               <div
-                className={`relative duration-200 transition-all ease-in-out ${
+                className={`relative duration-200 transition-all ease-in-out  ${
                   !checkShowSeasrch
                     ? "invisible w-0 opacity-0"
                     : "visible w-[300px] opacity-100 z-[1000] "
                 }`}
               >
                 <div className="w-[300px] flex items-center absolute right-[-7px] top-[-18px]">
-                  <IoMdClose onClick={handleShowSearch} className="absolute left-2 text-xl z-[500] text-black font-bold" />
+                  <IoMdClose
+                    onClick={handleShowSearch}
+                    className="absolute left-2 text-xl z-[500] text-black font-bold"
+                  />
                   <input
                     type="text"
                     placeholder="Nhập từ khóa tìm kiếm...."
                     className="py-1 w-[300px] rounded-full pl-10 border border-[#ebebeb] text-black outline-none"
                   />
-                  <IoIosSearch  className="absolute right-2 text-xl z-[500] text-black font-bold" />
+                  <IoIosSearch className="absolute right-2 text-xl z-[500] text-black font-bold" />
                 </div>
               </div>
             </div>
@@ -199,31 +232,69 @@ export const Header = ({ className }) => {
               <CiUser />
               <div className="bg-[#fff] text-[#231f20] hidden group-hover:block w-[200px] absolute top-[39px] right-0 z-50 menu_acc">
                 <ul className="p-2 text-sm">
-                  <li>
-                    <a className="hover:text-brown" href="">
-                      Đăng nhập
-                    </a>
-                  </li>
-                  <li>
-                    <a className="hover:text-brown" href="">
-                      Đăng ký
-                    </a>
-                  </li>
+                  {userState.userInfo ? (
+                    <div>
+                      <li>
+                        <Link
+                          to={"/profile"}
+                          className="hover:text-brown"
+                          href=""
+                        >
+                          Tài khoản
+                        </Link>
+                      </li>
+                      <li>
+                        <button
+                          onClick={handlerLogOut}
+                          className="hover:text-brown border-non outline-none"
+                        >
+                          Đăng xuất
+                        </button>
+                      </li>
+                    </div>
+                  ) : (
+                    <div>
+                      <li>
+                        <Link
+                          to={"/login"}
+                          className="hover:text-brown"
+                          href=""
+                        >
+                          Đăng nhập
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to={"/register"}
+                          className="hover:text-brown"
+                          href=""
+                        >
+                          Đăng ký
+                        </Link>
+                      </li>
+                    </div>
+                  )}
 
                   <li>
-                    <a className="hover:text-brown" href="">
+                    <Link className="hover:text-brown" href="">
                       Yêu thích
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
             </div>
-            <div className="w-7 h-7 flex items-center justify-center text-white font-semibold rounded-full bg-[#2a3f50] relative">
+            <Link
+              to={"/cart"}
+              className=" group w-7 h-7 flex items-center justify-center text-white font-semibold rounded-full bg-[#2a3f50] relative"
+            >
               <span className="absolute top-[1px] -right-2 text-xs bg-[#2a3f50] w-7 h-4 rounded-md text-right pr-1">
-                0
+                {cartState?.cartInfo != null ? cartState?.cartInfo?.length : 0}
               </span>
               <IoBagOutline className="z-40" />
-            </div>
+              <div className="absolute hidden group-hover:block right-0 top-[0] z-[1000] duration-500 ease-in-out transition-all pt-[45px]">
+                <CartDropdown />
+              </div>
+            </Link>
             <div className="duration-200 lg:hidden md:hidden">
               {navIsVisible ? (
                 <IoMdClose

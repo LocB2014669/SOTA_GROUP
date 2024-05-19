@@ -23,7 +23,7 @@ export const ItemFooter = ({ data, footer_one, className }) => {
           </div>
 
           <div
-            className={`flex-col lg:flex md:flex hidden gap-y-3 my-5 duration-200 ${
+            className={`flex-col lg:flex md:flex  gap-y-3 my-5 duration-200 ${
               checkItemFooterShow ? "flex" : "hidden"
             }`}
           >

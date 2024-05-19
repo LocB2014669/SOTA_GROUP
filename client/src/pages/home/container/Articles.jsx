@@ -1,12 +1,87 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GrFavorite } from "react-icons/gr";
+import { MdOutlineFavorite } from "react-icons/md";
 import { PiEyeLight } from "react-icons/pi";
 import { SlBag } from "react-icons/sl";
 import stable from "../../../constants/Stable";
 import { Link } from "react-router-dom";
 import { ModalProductDetails } from "../../../components/product/ModalProductDetails";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../../stores/reducers/cartReduce";
 
 export const Articles = ({ className, data }) => {
+  const cartState = useSelector((state) => state.cart);
+  const [itemsFavorite, setItemsFavorite] = useState(
+    JSON.parse(localStorage.getItem("favorite")) || []
+  );
+  // const cartState = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const [itemCart, setItemCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("favorite", JSON.stringify(itemsFavorite));
+  }, [itemsFavorite]);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(itemCart));
+  }, [itemCart]);
+
+  const handleAddFavorite = (item) => {
+    const dataOld = localStorage.getItem("favorite");
+    const obj = JSON.parse(dataOld);
+
+    if (!itemsFavorite.includes(item)) {
+      const updatedFavorite = [...obj, item];
+
+      setItemsFavorite(updatedFavorite);
+      toast.success("Đã thêm vào yêu thích");
+    } else {
+      const updatedFavorite = itemsFavorite.filter((i) => i !== item);
+      setItemsFavorite(updatedFavorite);
+      toast.success("Đã xóa khỏi yêu thích");
+    }
+  };
+
+  const hanlderAddToCart = (item) => {
+    const dataItem = {
+      id: item.id,
+      check: true,
+      title: item.tenvi,
+      photo: item.photo,
+      price: item.giamoi,
+      soluong: 1,
+    };
+
+    const dataCart = localStorage.getItem("cart");
+    const obj = JSON.parse(dataCart);
+
+    const existingItem = obj.find((cartItem) => cartItem.id === dataItem.id);
+
+    if (!existingItem) {
+      const updatedCart = [...obj, dataItem];
+      dispatch(cartActions.setCartInfo(updatedCart));
+      setItemCart(updatedCart);
+      toast.success("Đã thêm vào giỏ hàng");
+    } else {
+      const updatedCart = obj.map((cartItem) => {
+        if (cartItem.id === dataItem.id) {
+          return {
+            ...cartItem,
+            soluong: cartItem.soluong + 1,
+          };
+        }
+        return cartItem;
+      });
+      dispatch(cartActions.setCartInfo(updatedCart));
+
+      setItemCart(updatedCart);
+      toast.success("Đã cập nhật vào giỏ hàng");
+    }
+  };
+  // console.log(cartState, "cartState");
+
   const [selectedProductId, setSelectedProductId] = useState(null);
   const handleOpenModal = (productId) => {
     setSelectedProductId(productId);
@@ -34,7 +109,13 @@ export const Articles = ({ className, data }) => {
             className="flex duration-500 inset-y-full group-hover:inset-y-12 ease-in-out flex-col item-center absolute text-2xl right-7 gap-2"
           >
             <div className="w-8 h-8 p-2 flex justify-center items-center rounded-full shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] hover:bg-[#b61615] hover:text-white duration-200 bg-white">
-              <GrFavorite />
+              <button onClick={() => handleAddFavorite(data)}>
+                {itemsFavorite.some((item) => item.id === data.id) ? (
+                  <MdOutlineFavorite className="text-red-500" />
+                ) : (
+                  <GrFavorite />
+                )}
+              </button>
             </div>
             {/* modal */}
             <div
@@ -48,14 +129,19 @@ export const Articles = ({ className, data }) => {
             )}
 
             <div className="w-8 h-8 p-2 flex justify-center items-center rounded-full shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] hover:bg-[#b61615] hover:text-white duration-200 bg-white">
-              <SlBag />
+              <label
+                htmlFor="my_modal_6"
+                onClick={() => hanlderAddToCart(data)}
+              >
+                <SlBag />
+              </label>
             </div>
           </div>
         </div>
         <div className="text-center px-4 h-[50px] ">
           <Link
-            to={`/product/${data?.id}`}
-            className="font-normal text-base line-clamp-2"
+            to={`/products/${data?.id}`}
+            className="font-normal text-base line-clamp-2 hover:text-brown"
           >
             {data?.tenvi}
           </Link>

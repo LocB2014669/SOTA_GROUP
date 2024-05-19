@@ -14,6 +14,11 @@ export default {
         blueDe: "#2a3f50",
         soft: "#4D4D4D",
         price: "#eb0000",
+        hard: "#777",
+        inputBor: "#E0E0E0",
+      },
+      boxShadow: {
+        display: "0px 1px 69.16px 6.84px rgba(20,64,51,0.05)",
       },
       keyframes: {
         popup: {

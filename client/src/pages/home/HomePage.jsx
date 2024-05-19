@@ -24,9 +24,8 @@ import toast from "react-hot-toast";
 import { getAllCate } from "../../services/categoryAPI";
 import { getPhotoNews } from "../../services/newsAPI";
 import { ProductSuggest } from "./container/ProductSuggest";
-import { AriticelCol } from "../../components/AriticelCol";
+import { ModalCart } from "../../components/cart/ModalCart";
 import { ModalProductDetails } from "../../components/product/ModalProductDetails";
-
 
 export const HomePage = () => {
   const { data: dataProductNews, isLoading: isLoadingProductNew } = useQuery({
@@ -127,14 +126,11 @@ export const HomePage = () => {
         className={"max-w-6xl mx-auto my-10"}
       />
       <InfoService className={"max-w-6xl mx-auto my-10"} />
-      {/* {!isLoadingProductNew && (
-        <div>
-          {dataProductNews?.map((item, index) => (
-            <AriticelCol key={index} data={item} isLoading={isLoadingProductNew} />
-          ))}
-        </div>
-      )} */}
-      <ModalProductDetails/>
+      <ModalCart />
+      {/* <label htmlFor="my_modal_6" className="btn">
+        open modalsasasa
+      </label> */}
+      
     </MainLayout>
   );
 };

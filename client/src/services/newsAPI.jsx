@@ -1,9 +1,31 @@
 import axios from "axios";
+import apiLink from "../constants/apiLink";
 
 export const getPhotoNews = async ({}) => {
   try {
     const { data } = await axios.get(
-      "https://sota-group-thto-5snt84q2t-locb2014669s-projects.vercel.app/backend/api/news.php"
+      `${apiLink}/news.php`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getPolicyNews = async ({}) => {
+  try {
+    const { data } = await axios.get(
+      `${apiLink}/news_policy.php`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getNewsById = async ({ newsId }) => {
+  try {
+    const { data } = await axios.get(
+      // `${apiLink}/news_ById.php?id=${newsId}`
+      `${apiLink}/news_ById.php?id=${newsId}`
     );
     return data;
   } catch (error) {

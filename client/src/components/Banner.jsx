@@ -44,7 +44,7 @@ export const Banner = () => {
           {...options}
         >
           {dataBanner
-            ?.filter((item) => item.photo != stable.STABLE_LOGO)
+            ?.filter((item) => item.type == "slide")
             .map((item, index) => (
               <div key={index} className="item">
                 <img
