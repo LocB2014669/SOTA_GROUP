@@ -24,7 +24,7 @@ export const RegisterPage = () => {
       });
     },
     onSuccess: (data) => {
-      toast.success("Đăng nhập thành công");
+      toast.success("Đăng ký thành công");
       setEmail("");
       setPassword("");
       setPhone("");
