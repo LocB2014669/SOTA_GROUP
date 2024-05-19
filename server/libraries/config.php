@@ -20,7 +20,8 @@ $config = array(
 		'dienthoai' => '0939.857.111',
 		'diachi' => 'Tòa Nhà HD Building 154 Phạm Văn Chiêu, Phường 9, Gò Vấp, Thành phố Hồ Chí Minh',
 		'website' => 'sotagroup.vn',
-		'worktime' => '8h - 17h từ thứ 2 đến thứ sáu, 8h - 12h sáng thứ bảy'
+		'worktime' => '8h - 17h từ thứ 2 đến thứ sáu, 8h - 12h sáng thứ bảy',
+		'huongdan' => 'http://localhost:5173/supportSize'
 	),
 	'author' => array(
 		'name' => 'CÔNG TY TNHH CÔNG NGHỆ SOTA GROUP',

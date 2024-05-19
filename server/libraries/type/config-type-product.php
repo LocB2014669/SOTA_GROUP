@@ -8,10 +8,10 @@
     $config['product'][$nametype]['qr'] = false;
     $config['product'][$nametype]['cat'] = true;
     $config['product'][$nametype]['item'] = true;
-    $config['product'][$nametype]['sub'] = false;
+    $config['product'][$nametype]['sub'] = true;
     $config['product'][$nametype]['brand'] = true;
     $config['product'][$nametype]['mau'] = false;
-    $config['product'][$nametype]['size'] = false;
+    $config['product'][$nametype]['size'] = true;
     $config['product'][$nametype]['danhgia'] = true; 
     $config['product'][$nametype]['doday'] = false;
     $config['product'][$nametype]['tags'] = false;
@@ -40,7 +40,7 @@
             "thumb_photo" => '100x100x1',
             "img_type_photo" => '.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF'
         ),
-        /*"video" => array
+        "video" => array
         (
             "title_main_photo" => "Video sản phẩm",
             "title_sub_photo" => "Video",
@@ -48,15 +48,15 @@
             "video_photo" => true,
             "tieude_photo" => true
         ),
-        "taptin" => array
-        (
-            "title_main_photo" => "Tập tin sản phẩm",
-            "title_sub_photo" => "Tập tin",
-            "number_photo" => 2,
-            "file_photo" => true,
-            "tieude_photo" => true,
-            "file_type_photo" => 'doc|docx|pdf|rar|zip|ppt|pptx|DOC|DOCX|PDF|RAR|ZIP|PPT|PPTX|xls|jpg|png|gif|JPG|PNG|GIF|xls|XLS'
-        )*/
+        // "taptin" => array
+        // (
+        //     "title_main_photo" => "Tập tin sản phẩm",
+        //     "title_sub_photo" => "Tập tin",
+        //     "number_photo" => 2,
+        //     "file_photo" => true,
+        //     "tieude_photo" => true,
+        //     "file_type_photo" => 'doc|docx|pdf|rar|zip|ppt|pptx|DOC|DOCX|PDF|RAR|ZIP|PPT|PPTX|xls|jpg|png|gif|JPG|PNG|GIF|xls|XLS'
+        // )
     );
     $config['product'][$nametype]['ma'] = true;
     $config['product'][$nametype]['gia'] = true;
