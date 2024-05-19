@@ -4,7 +4,7 @@ import apiLink from "../constants/apiLink";
 export const getPhotoNews = async ({}) => {
   try {
     const { data } = await axios.get(
-      `${apiLink}/news.php`
+      `https://loc.bendeptrai.com/backend/api/news.php`
     );
     return data;
   } catch (error) {
@@ -14,7 +14,7 @@ export const getPhotoNews = async ({}) => {
 export const getPolicyNews = async ({}) => {
   try {
     const { data } = await axios.get(
-      `${apiLink}/news_policy.php`
+      `https://loc.bendeptrai.com/backend/api/news_policy.php`
     );
     return data;
   } catch (error) {
@@ -25,7 +25,7 @@ export const getNewsById = async ({ newsId }) => {
   try {
     const { data } = await axios.get(
       // `${apiLink}/news_ById.php?id=${newsId}`
-      `${apiLink}/news_ById.php?id=${newsId}`
+      `https://loc.bendeptrai.com/backend/api/news_ById.php?id=${newsId}`
     );
     return data;
   } catch (error) {

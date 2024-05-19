@@ -4,7 +4,7 @@ import apiLink from "../constants/apiLink";
 export const addOrder = async ({ formData }) => {
   try {
     const { data } = await axios.post(
-      `${apiLink}/order.php?quanly=order`,
+      `https://loc.bendeptrai.com/backend/api/order.php?quanly=order`,
       {
         userId: formData.userId,
         products: formData.products,

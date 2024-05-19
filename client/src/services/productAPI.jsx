@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getAllProduct = async ({}) => {
   try {
-    const { data } = await axios.get(`${apiLink}/product.php`);
+    const { data } = await axios.get(`https://loc.bendeptrai.com/backend/api/product.php`);
     return data;
   } catch (error) {
     console.log(error);
@@ -11,7 +11,7 @@ export const getAllProduct = async ({}) => {
 export const getProductById = async ({ productId }) => {
   try {
     const { data } = await axios.get(
-      `${apiLink}/productById.php?id=${productId}`
+      `https://loc.bendeptrai.com/backend/api/productById.php?id=${productId}`
     );
     return data;
   } catch (error) {
@@ -20,7 +20,7 @@ export const getProductById = async ({ productId }) => {
 };
 export const getPhotoGallery = async ({ productId }) => {
   try {
-    const { data } = await axios.get(`${apiLink}/gallery.php?id=${productId}`);
+    const { data } = await axios.get(`https://loc.bendeptrai.com/backend/api/gallery.php?id=${productId}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -30,7 +30,7 @@ export const getPhotoGallery = async ({ productId }) => {
 
 export const getAllBrand = async ({}) => {
   try {
-    const { data } = await axios.get(`${apiLink}/product_brand.php`);
+    const { data } = await axios.get(`https://loc.bendeptrai.com/backend/api/product_brand.php`);
     return data;
   } catch (error) {
     console.log(error);
